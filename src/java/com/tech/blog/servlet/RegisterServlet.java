@@ -9,6 +9,7 @@ import com.tech.blog.dao.UserDao;
 import com.tech.blog.entities.User;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  *
  * @author ASUS
- */
+ */ 
+@MultipartConfig
 public class RegisterServlet extends HttpServlet {
 
     /**
@@ -33,12 +35,7 @@ public class RegisterServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegisterServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
+          
           //fetch all form data 
             String check=request.getParameter("check"); 
             if(check==null) {
@@ -68,8 +65,7 @@ public class RegisterServlet extends HttpServlet {
             
             
              
-            out.println("</body>");
-            out.println("</html>");
+           
         }
     }
 

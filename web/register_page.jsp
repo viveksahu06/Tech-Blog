@@ -78,9 +78,13 @@
                                 <div class="container text-center" id="loader" style="display: none;">
                                     <span class="fa fa-refresh fa-spin fa-4x"></span>
                                     <h4>Please wait..</h4>
+                                </div> 
+                                <br>   
+                                <div class="container text-center" id="loader" style="display: none" > 
+                                <span class="fa  fa-refresh fa-spin fa-3x"></span> 
+                                <h4>Please wait...</h4>
                                 </div>
-
-                                <button id="sumbimt-btn" type="submit" class="btn btn-primary primary-background">Submit</button>
+                               <button id="submit-btn" type="submit" class="btn btn-primary primary-background">Submit</button>
                             </form>
 
                         </div>
@@ -99,7 +103,7 @@
         
         
         
-        
+           
           <script
             src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -107,6 +111,48 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="js/myjs.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+        <script> 
+          $(document).ready(function(){
+    console.log("loaded...."); 
+    $('#reg-form').on('submit',function(event){
+        event.preventDefault(); 
+        let form = new FormData(this);  
+        $('#submit-btn').hide(); 
+        $('#loader').show();
+        //send register 
+        $.ajax({
+            url: "RegisterServlet", 
+            type: 'POST', // Corrected to 'POST' from 'Post'
+            data: form, 
+            success: function(data,textStatus,jqXHR){
+                console.log(data); 
+                $('#submit-btn').show(); 
+                $('#loader').hide();  
+                if(data.trim()==='done') 
+                {
+                swal("Registerd Successfully.. we are redirecting to the login page")
+                  .then((value) => {
+                         window.location="Login.jsp"
+                        }); 
+                    }else{
+                        swal(data);
+                    }
+                
+            }, 
+            error: function(jqXHR,textStatus,errorThrown){ 
+                $('#submit-btn').show(); 
+                $('#loader').hide();  
+                swal("something went wrong..try again");
+                          
+            }, 
+            processData: false, // Corrected to ',' from ';'
+            contentType: false // Corrected to ',' from ';'
+        });
+    });
+});
 
+        </script>
+            
     </body>
 </html>

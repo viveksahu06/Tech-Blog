@@ -54,7 +54,7 @@ public class UserDao {
                  user.setPasssword(set.getString("password")); 
                  user.setGender(set.getString("gender")); 
                  user.setAbout(set.getString("about"));  
-                 user.setDatetime(set.getTimestamp("rdate")); 
+                 user.setDatetime(set.getTimestamp("datetime")); 
                  user.setProfile(set.getString("profile"));
                
              }
